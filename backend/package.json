@@ -1,0 +1,15 @@
+{
+  "name": "node-backend",
+  "version": "1.0.0",
+  "description": "Backend for Gym Form Guru",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^1.4.5",
+    "path": "^0.12.7"
+  }
+}

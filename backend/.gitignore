@@ -1,0 +1,48 @@
+# Ignore Python cache files and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore documentation and tests in installed packages
+**/tests/**
+**/docs/**
+*.md
+*.txt
+
+
+# --- Node & JavaScript ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build outputs (React, etc.)
+build/
+dist/
+
+# Logs
+*.log
+logs
+*.log.*
+
+# --- Python ---
+# Virtual environment folders (named venv, .venv, env, etc.)
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+
+# --- Environment/Secrets ---
+.env
+.env.*  # e.g. .env.local, .env.production

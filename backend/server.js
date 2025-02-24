@@ -15,7 +15,7 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
-// Serve uploaded files (so we can preview them)
+// Serve uploaded files
 app.use('/uploads', express.static(uploadDir));
 
 // Configure Multer storage
@@ -37,37 +37,26 @@ app.post('/upload', upload.single('video'), (req, res) => {
   res.status(200).json({ message: 'File uploaded successfully!', filename: req.file.filename });
 });
 
-// Endpoint to list uploaded videos
-// app.get('/videos', (req, res) => {
-//   fs.readdir(uploadDir, (err, files) => {
-//     if (err) {
-//       return res.status(500).json({ error: 'Error reading files' });
-//     }
-//     const videoFiles = files.map(file => ({
-//       filename: file,
-//       url: `http://localhost:5001/uploads/${file}`
-//     }));
-//     res.json(videoFiles);
-//   });
-// });
+// Get the port from environment or default to 5001
+const PORT = process.env.PORT || 5001;
+
 // Endpoint to list uploaded videos
 app.get('/videos', (req, res) => {
-    const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
-    fs.readdir(uploadDir, (err, files) => {
-      if (err) {
-        return res.status(500).json({ error: 'Error reading files' });
-      }
-      const videoFiles = files.map(file => ({
-        filename: file,
-        url: `${baseUrl}/uploads/${file}`
-      }));
-      res.json(videoFiles);
-    });
+  // Use BASE_URL environment variable if set, otherwise fallback to localhost
+  const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+  fs.readdir(uploadDir, (err, files) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error reading files' });
+    }
+    const videoFiles = files.map(file => ({
+      filename: file,
+      url: `${baseUrl}/uploads/${file}`
+    }));
+    res.json(videoFiles);
   });
-  
+});
 
-
-// Optional: Delete endpoint (if you want to remove videos)
+// Optional: Delete endpoint
 app.delete('/videos/:filename', (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join(uploadDir, filename);
@@ -86,7 +75,6 @@ app.delete('/videos/:filename', (req, res) => {
 });
 
 // Start the Node server
-const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Node server listening on port ${PORT}`);
 });

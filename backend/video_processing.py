@@ -273,7 +273,7 @@ def process_video():
         "average_knee_angle_right": avg_right_knee
     }
 
-    processed_video_url = f"http://localhost:5002/download/{processed_filename}"
+    processed_video_url = f"http://localhost:5000/download/{processed_filename}"
     return jsonify({
         "message": "Video processed successfully",
         "analysis": analysis_summary,
@@ -285,4 +285,4 @@ def download_video(filename):
     return send_from_directory(PROCESSED_FOLDER, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(port=5002, debug=True)
+    app.run(port=5000, debug=True)

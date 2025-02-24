@@ -3,6 +3,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
+  // Replace these with your live Heroku URLs
+  const NODE_API_URL = process.env.REACT_APP_NODE_API_URL;
+  const PYTHON_API_URL = process.env.REACT_APP_PYTHON_API_URL;
+
+
   const [video, setVideo] = useState(null);
   const [uploadStatus, setUploadStatus] = useState("");
   const [uploadedVideos, setUploadedVideos] = useState([]);
@@ -27,7 +32,7 @@ function App() {
     const formData = new FormData();
     formData.append("video", video);
     try {
-      await axios.post("http://localhost:5001/upload", formData, {
+      await axios.post(`${NODE_API_URL}/upload`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setUploadStatus("Upload successful!");
@@ -41,7 +46,7 @@ function App() {
   // Fetch the list of uploaded videos from Node
   const fetchUploadedVideos = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/videos");
+      const response = await axios.get(`${NODE_API_URL}/videos`);
       setUploadedVideos(response.data);
     } catch (error) {
       console.error("Error fetching videos:", error);
@@ -55,7 +60,7 @@ function App() {
       const formData = new FormData();
       formData.append("filename", filename); // Tells Python which video to process
 
-      const response = await axios.post("http://localhost:5002/process_video", formData, {
+      const response = await axios.post(`${PYTHON_API_URL}/process_video`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

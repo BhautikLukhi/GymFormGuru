@@ -38,18 +38,34 @@ app.post('/upload', upload.single('video'), (req, res) => {
 });
 
 // Endpoint to list uploaded videos
+// app.get('/videos', (req, res) => {
+//   fs.readdir(uploadDir, (err, files) => {
+//     if (err) {
+//       return res.status(500).json({ error: 'Error reading files' });
+//     }
+//     const videoFiles = files.map(file => ({
+//       filename: file,
+//       url: `http://localhost:5001/uploads/${file}`
+//     }));
+//     res.json(videoFiles);
+//   });
+// });
+// Endpoint to list uploaded videos
 app.get('/videos', (req, res) => {
-  fs.readdir(uploadDir, (err, files) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error reading files' });
-    }
-    const videoFiles = files.map(file => ({
-      filename: file,
-      url: `http://localhost:5001/uploads/${file}`
-    }));
-    res.json(videoFiles);
+    const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+    fs.readdir(uploadDir, (err, files) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error reading files' });
+      }
+      const videoFiles = files.map(file => ({
+        filename: file,
+        url: `${baseUrl}/uploads/${file}`
+      }));
+      res.json(videoFiles);
+    });
   });
-});
+  
+
 
 // Optional: Delete endpoint (if you want to remove videos)
 app.delete('/videos/:filename', (req, res) => {

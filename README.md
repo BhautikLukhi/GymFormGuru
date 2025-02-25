@@ -1,6 +1,6 @@
 # Squat Form Guru
 
-**Squat Form Guru**  leverages computer vision and pose estimation to provide feedback on gym form. It counts repetitions, angles, gauge meter, progress, analyzes exercise posture, and offers personalized coaching to help users perfect their workout technique and reduce the risk of injury.
+**Squat Form Guru**  leverages computer vision and pose estimation to provide feedback on the high bar squats form. It counts repetitions, angles, gauge meter, progress, analyzes exercise posture, and offers personalized coaching to help users perfect their workout technique and reduce the risk of injury.
 
 ## Features
 

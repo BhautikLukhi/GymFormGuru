@@ -5,11 +5,12 @@
 ## Features
 
 - **Real-Time Pose Estimation:**  
-  Utilizes pre-trained models from MediaPipe to detect key body points in exercise videos.
+  Utilizes pre-trained models from MediaPipe to detect key body points in the uploaded video.
+- **Rep Counting:**  
+  Automatically counts Squats repetitions using movement analysis algorithm.
 - **Form Analysis:**  
   Compares user movements against thresholds and provides actionable suggestions for improvement.
-- **Rep Counting:**  
-  Automatically counts exercise repetitions using movement analysis algorithms.
+
 
 
 ## Project Structure
@@ -35,7 +36,7 @@ SquatFormGuru/
 
 ## Getting Started
 
-Follow these instructions to set up and run Gym Form Guru locally.
+Follow these instructions to set up and run Squat Form Guru locally.
 
 ### Prerequisites
 
@@ -44,13 +45,14 @@ Follow these instructions to set up and run Gym Form Guru locally.
   - Virtual environment tool (venv or virtualenv)
   - Node.js and npm
 
-### Installation
 
-1. **Clone the Repository:**
+1. **Clone this Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/SquatFormGuru.git
+   git clone https://github.com/BhautikLukhi/SquatFormGuru.git
    cd SquatFormGuru
+
+### Run locally
 
 2. **start node backend:**
 
@@ -58,7 +60,6 @@ Follow these instructions to set up and run Gym Form Guru locally.
    cd backend
    node server.js
    
-
 3. **Start python server**
 
    ```bash

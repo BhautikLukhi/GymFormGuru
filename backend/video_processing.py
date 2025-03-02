@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask import send_file
 import cv2
 import mediapipe as mp
 import os
@@ -150,7 +151,7 @@ def process_video():
     counter = 0  # how many reps so far
     stage = "Standing"
 
-    down_threshold = 120
+    down_threshold = 95
     up_threshold = 160
     in_down_phase = False
 
@@ -256,7 +257,7 @@ def process_video():
         squat_depth_feedback = "No reps detected. Ensure you're performing full squats."
         pace_feedback = "No rep detection to determine pace."
     else:
-        if avg_left_knee > 110 or avg_right_knee > 110:
+        if avg_left_knee > 10 or avg_right_knee > 110:
             squat_depth_feedback = "Your squat depth is shallow. Try lowering further."
         else:
             squat_depth_feedback = "Good squat depth!"
@@ -280,9 +281,7 @@ def process_video():
         "processed_video": processed_video_url
     })
 
-@app.route('/download/<filename>')
-def download_video(filename):
-    return send_from_directory(PROCESSED_FOLDER, filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
+
